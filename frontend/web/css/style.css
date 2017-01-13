@@ -1,0 +1,44 @@
+.topmenu {
+    height: 42px;
+    width: 1000px;
+    color: #000;
+    margin: 10px auto;
+}
+
+.topmenu a {
+    margin-right: 20px;
+}
+
+.fix {
+    color: red !important;
+}
+
+.fixct {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+.profile_link {
+    margin-right: 15px;
+}
+
+.success_info {
+    border: 1px solid green;
+    width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 3px;
+    color: green;
+}
+
+.success_info div {
+    margin: 15px 5px;
+}
+
+.link_info {
+    margin: 35px 0 25px;
+}
+
+.need_link{
+    margin-top:25px;
+}
