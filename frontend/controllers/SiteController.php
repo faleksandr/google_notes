@@ -171,7 +171,7 @@ class SiteController extends Controller
     public function actionProfile()
     {
 
-        $event = Events::find()->asArray()->where(['name' => Yii::$app->user->identity->username])->orderBy(['id' => SORT_DESC])->all();
+        $event = Events::find()->asArray()->where(['user' => Yii::$app->user->identity->username])->orderBy(['id' => SORT_DESC])->all();
         return $this->render("profile", compact('event'));
     }
 
@@ -186,7 +186,8 @@ class SiteController extends Controller
     {
         if ($update) {
             $newevent = new Events();
-            $newevent->name = Yii::$app->user->identity->username;
+            $newevent->user = Yii::$app->user->identity->username;
+            $newevent->user_id = Yii::$app->user->identity->id;
             switch ($value) {
                 case register:
                     $newevent->text = "добро пожаловать в систему";

@@ -14,11 +14,11 @@ echo $form->field($model, 'text')->textarea(['style' => 'width:400px;', 'rows' =
 echo '<b>Выберите категорию</b><br>';
 echo $tree;?>
 <br><b>Видимость заметки</b><br>
-<input type="radio" name="Notes[visibility]" value="onlyme"> Только мне<br>
-<input type="radio" name="Notes[visibility]" checked value="all"> Всем<br>
+<input type="radio" name="Notes[visibility]" value="100"> Только мне<br>
+<input type="radio" name="Notes[visibility]" checked value="101"> Всем<br>
 <?php
 foreach ($rbac as $role){?>
-    <input type="radio" name="Notes[visibility]" value="<?=$role['name'];?>"> Группе: <?=$role['name'];?>
+    <input type="radio" name="Notes[visibility]" value="<?=$role['id'];?>"> Группе: <?=$role['name'];?>
     <br>
 <?}?>
 <?

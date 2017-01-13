@@ -11,10 +11,10 @@ namespace common\models;
 
 use yii\db\ActiveRecord;
 
-class Groups extends ActiveRecord
+class Roles extends ActiveRecord
 {
     public static function tableName()
     {
-        return 'group_users';
+        return 'roles';
     }
 }

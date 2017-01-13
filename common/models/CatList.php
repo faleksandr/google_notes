@@ -16,7 +16,7 @@ class CatList extends ActiveRecord
 
     public static function tableName()
     {
-        return 'notes_category_list';
+        return 'categories_notes';
     }
 
     public function rules()

@@ -10,7 +10,7 @@ use common\models\Category;
 use common\models\CatList;
 use common\models\EditForm;
 use common\models\Search;
-use common\models\Groups;
+use common\models\Roles;
 
 class GoogleController extends AppController
 {
@@ -29,7 +29,7 @@ class GoogleController extends AppController
         $this->tree = $this->getTree();
 
         $model = new Notes();
-        $rbac = Groups::find()->asArray()->all();
+        $rbac = Roles::find()->asArray()->all();
         //$this->debug($rbac);
 
         if ($model->load(Yii::$app->request->post())) {
@@ -82,9 +82,13 @@ class GoogleController extends AppController
     public function actionView()
     {
         $model = Notes::find()->asArray()->all();
-        $user = User::find()->asArray()->all();
-        //$this->debug($model);
-        return $this->render('view', compact('model', 'user'));
+        $user = User::find()->asArray()->select(['role'])->where(['id' => Yii::$app->user->identity->id])->limit(1)->one();
+       // $groups = Roles::find()->asArray()->indexBy('id')->all();
+       // $rbac = Roles::find()->asArray()->select(['name'])->where(['id' => $user['role']])->limit(1)->one();
+
+
+        //$this->debug($groups);
+        return $this->render('view', ['model' => $model, 'user' => $user/*, 'rbac' => $rbac, 'groups' => $groups*/]);
     }
 
     /*
@@ -94,6 +98,7 @@ class GoogleController extends AppController
     public function actionEdit()
     {
         $model = Notes::find()->asArray()->orderBy(['id' => SORT_DESC])->all();
+        $user = User::find()->asArray()->select(['role'])->where(['id' => Yii::$app->user->identity->id])->limit(1)->one();
         $request = Yii::$app->request;
         $id = $request->get('id');
 
@@ -110,10 +115,10 @@ class GoogleController extends AppController
                 //$this->debug($edit_note);
                 $edit_note->save();
             }
-            return $this->render('editor', compact('model', 'edit_note', 'edit_open'));
+            return $this->render('editor', compact('model', 'edit_note', 'edit_open', 'user'));
         }
 
-        if (!$id) return $this->render('edit', compact('model'));
+        if (!$id) return $this->render('edit', compact('model', 'user'));
     }
 
     /*

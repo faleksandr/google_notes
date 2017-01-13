@@ -15,7 +15,7 @@ class Mailer extends ActiveRecord
 {
     public static function tableName
     {
-        return 'mail';
+        return 'mailing_list';
     }
 
     public function attributeLabels()
