@@ -19,7 +19,7 @@ class GoogleController extends AppController
     public $buffer;
 
     /*
-     * Form for add new notes
+     * Form to add new notes
      */
 
     public function actionIndex()
