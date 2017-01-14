@@ -4,10 +4,11 @@
  * 1,2,3 and more for roles
  * 100 - only for me
  * 101 - all
- * type column tinyint(256) from -127 to 127 :)
+ * type column tinyint(255) from -127 to 127 :)
  */
 
-$role = $user['role'];
+//$role = $user['role'];
+$role = Yii::$app->user->identity->role;
 foreach ($model as $mdl) {
 
     if ($mdl['visibility'] == 100) {

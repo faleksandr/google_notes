@@ -76,19 +76,15 @@ class GoogleController extends AppController
     }
 
     /*
-     * View notes
+     * View notes for different groups
+     * Yii::$app->user->identity->role as RBAC
      */
 
     public function actionView()
     {
         $model = Notes::find()->asArray()->all();
-        $user = User::find()->asArray()->select(['role'])->where(['id' => Yii::$app->user->identity->id])->limit(1)->one();
-       // $groups = Roles::find()->asArray()->indexBy('id')->all();
-       // $rbac = Roles::find()->asArray()->select(['name'])->where(['id' => $user['role']])->limit(1)->one();
 
-
-        //$this->debug($groups);
-        return $this->render('view', ['model' => $model, 'user' => $user/*, 'rbac' => $rbac, 'groups' => $groups*/]);
+        return $this->render('view', ['model' => $model]);
     }
 
     /*
