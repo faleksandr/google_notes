@@ -59,33 +59,6 @@ return [
         ],
 
     ],
-    'modules' => [
-        'admin' => [
-            'class' => 'frontend\modules\admin\Module',
-        ],
-        'rbac' => [
-            'class' => 'mdm\admin\Module',
-            'controllerMap' => [
-                'assignment' => [
-                    'class' => 'mdm\admin\controllers\AssignmentController',
-                    /* 'userClassName' => 'app\models\User', */
-                    'idField' => 'id',
-                    'usernameField' => 'username',
-                ],
-            ],
-            'layout' => 'left-menu',
-            'mainLayout' => '@app/views/layouts/main.php',
-        ]
-    ],
-    'as access' => [
-    'class' => 'mdm\admin\components\AccessControl',
-        'allowActions' => [
-            'site/*',
-            'admin/*',
-            'rbac/*',
-            'google/*',
-        ]
-    ],
 
     'params' => $params,
 ];

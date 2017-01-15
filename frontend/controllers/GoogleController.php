@@ -11,6 +11,7 @@ use common\models\CatList;
 use common\models\EditForm;
 use common\models\Search;
 use common\models\Roles;
+use yii\web\UploadedFile;
 
 class GoogleController extends AppController
 {
@@ -19,7 +20,7 @@ class GoogleController extends AppController
     public $buffer;
 
     /*
-     * Form to add new notes
+     * Form for add new notes
      */
 
     public function actionIndex()
@@ -37,7 +38,16 @@ class GoogleController extends AppController
             $model->author = Yii::$app->user->identity->username;
             $model->author_id = Yii::$app->user->identity->id;
             $model->date = time();
+
+            /*
+             * RewriteRule ^upload/store(.*)$ frontend/web/upload/store/$1 [L]
+             */
+            $model->image = UploadedFile::getInstance($model, 'image');
+            $model->img = '/upload/store/'.$model->image->name;
             $model->save();
+            if($model->image){
+                $model->upload();
+            }
 
             $category_list = new CatList();
             $category_list->notes_id = $model->id;
@@ -82,8 +92,7 @@ class GoogleController extends AppController
 
     public function actionView()
     {
-        $model = Notes::find()->asArray()->all();
-
+        $model = Notes::find()->asArray()->orderBy(['id' => SORT_DESC])->all();
         return $this->render('view', ['model' => $model]);
     }
 

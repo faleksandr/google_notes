@@ -1,8 +1,6 @@
 <?php
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-
-//\frontend\controllers\AppController::debug($category);
 ?>
 
 <div style="margin-top: 50px;"></div>
@@ -20,9 +18,9 @@ echo $tree;?>
 foreach ($rbac as $role){?>
     <input type="radio" name="Notes[visibility]" value="<?=$role['id'];?>"> Группе: <?=$role['name'];?>
     <br>
-<?}?>
 <?
-echo $form->field($model, 'img')->textInput(['style' => 'width:400px;']);
+}
+echo $form->field($model, 'image')->fileInput();
 echo $form->field($model, 'tags')->textInput(['style' => 'width:400px;']);
 echo Html::submitButton('Сохранить', ['class' => 'btn btn-success', 'style' => 'width:100px;']);
 ActiveForm::end();

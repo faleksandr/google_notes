@@ -7,14 +7,14 @@
  * type column tinyint(255) from -127 to 127 :)
  */
 
-//$role = $user['role'];
 $role = Yii::$app->user->identity->role;
+
 foreach ($model as $mdl) {
 
     if ($mdl['visibility'] == 100) {
-        include __DIR__ . '/list/notes.php';
-    } elseif ($mdl['visibility'] == 101) {
         if ($mdl['author_id'] == Yii::$app->user->identity->id) include __DIR__ . '/list/notes.php';
+    } elseif ($mdl['visibility'] == 101) {
+        include __DIR__ . '/list/notes.php';
     } elseif ($mdl['visibility'] == $role) {
         include __DIR__ . '/list/notes.php';
     } elseif ($mdl['visibility'] == $role) {

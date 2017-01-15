@@ -2,7 +2,7 @@
 
 namespace common\models;
 
-use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "notes".
@@ -13,12 +13,13 @@ use Yii;
  * @property string $img
  * @property string $tags
  */
-class Notes extends \yii\db\ActiveRecord
+class Notes extends ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public $cat;
+    public $image;
 
     public static function tableName()
     {
@@ -32,17 +33,26 @@ class Notes extends \yii\db\ActiveRecord
     {
         return [
             [['text', 'tags'], 'string'],
-            [['name', 'img'], 'string', 'max' => 255],
+            [['name'], 'string', 'max' => 255],
             ['cat', 'trim'],
             ['visibility', 'trim'],
             ['author', 'trim'],
-            ['author_id', 'integer']
+            ['author_id', 'integer'],
+            [['image'], 'file', 'extensions' => 'png, jpg'],
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
+    public function upload()
+    {
+        if ($this->validate()) {
+            $path = 'upload/store/' . $this->image->baseName . '.' . $this->image->extension;
+            $this->image->saveAs($path);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function attributeLabels()
     {
         return [
